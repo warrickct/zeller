@@ -22,14 +22,12 @@ export const Section = (props: SectionProps) => {
 
 const StyledSection = styled.div`
     display: flex;
-    background: green;
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem;
     margin-bottom: 2.5rem;
-    background: orange;
 
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e7e7e7;
 `;
 
 export default Section;

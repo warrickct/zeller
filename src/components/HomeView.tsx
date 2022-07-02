@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Section from './Section';
-import UserListItem from './UserListItem';
+import UserList from './UserList';
 import UserRoleListItem from './UserRoleListItem';
 
 export const HomeView = () => {
@@ -12,7 +12,7 @@ export const HomeView = () => {
                 <UserRoleListItem />
             </Section>
             <Section title="Admin Users">
-                <UserListItem />
+                <UserList />
             </Section>
         </StyledHomeView>
     )

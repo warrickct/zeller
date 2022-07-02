@@ -5,13 +5,13 @@ type SectionHeaderProps = {
 }
 export const SectionHeader = (props: SectionHeaderProps) => {
     return (
-        <h2>
+        <StyledSectionHeader>
             {props.title}
-        </h2>
+        </StyledSectionHeader>
     )
 }
 
-const StyledSectionHeader =  styled.div`
+const StyledSectionHeader =  styled.h2`
     margin-bottom: 2rem;
 `;
 
