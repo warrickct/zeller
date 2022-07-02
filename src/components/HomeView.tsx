@@ -1,15 +1,13 @@
 import styled from 'styled-components';
+import RoleList from './RoleList';
 import Section from './Section';
 import UserList from './UserList';
-import UserRoleListItem from './UserRoleListItem';
 
 export const HomeView = () => {
-
-
     return (
         <StyledHomeView>
             <Section title="User Types">
-                <UserRoleListItem />
+                <RoleList />
             </Section>
             <Section title="Admin Users">
                 <UserList />

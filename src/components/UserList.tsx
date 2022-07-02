@@ -2,20 +2,21 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import UserListItem from './UserListItem';
 
-export enum UserRoles {
+export enum UserRole {
     ADMIN = "Admin",
-    BASIC = "Basic"
+    BASIC = "Basic",
+    MANAGER = "Manager"
 };
 
 export const UserList = () => {
     const mockUsers = [
         {
             name: "John Stewart",
-            role: UserRoles.ADMIN,
+            role: UserRole.ADMIN,
         },
         {
             name: "Ben Howard",
-            role: UserRoles.ADMIN,
+            role: UserRole.ADMIN,
         }
     ]
 
