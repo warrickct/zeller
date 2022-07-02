@@ -1,0 +1,35 @@
+import styled from "styled-components";
+import SectionHeader from "./SectionHeader";
+
+type SectionProps = {
+    children: any;
+    title?: string;
+}
+
+export const Section = (props: SectionProps) => {
+    return (
+        <StyledSection>
+            { props.title ? 
+                <SectionHeader title={props.title}  />
+        : 
+        null }
+            { props.children }
+
+
+        </StyledSection>
+    )
+}
+
+const StyledSection = styled.div`
+    display: flex;
+    background: green;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    margin-bottom: 2.5rem;
+    background: orange;
+
+    border-bottom: 1px solid black;
+`;
+
+export default Section;
