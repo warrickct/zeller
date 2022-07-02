@@ -47,6 +47,7 @@ const StyledUserList = styled.ul`
     margin-block-start: 0;
     margin-block-end: 0;
     padding-inline-start: 0;
+    width: 100%;
 `;
 
 export default UserList;

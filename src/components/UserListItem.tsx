@@ -52,6 +52,14 @@ const StyledUserListItem = styled.li`
     align-items: center;
     margin: 0.5rem 0;
     font-weight: 500;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+
+    :hover {
+        background-color: #bfbfd6;
+    }
 `;
 
 const Name = styled.div`
