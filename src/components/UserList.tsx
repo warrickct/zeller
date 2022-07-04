@@ -10,16 +10,6 @@ export enum UserRole {
 };
 
 export const UserList = () => {
-    const mockUsers = [
-        {
-            name: "John Stewart",
-            role: UserRole.ADMIN,
-        },
-        {
-            name: "Ben Howard",
-            role: UserRole.ADMIN,
-        }
-    ]
 
     const [ users, setUsers ] = useState([]);
 
@@ -32,7 +22,14 @@ export const UserList = () => {
         initUserData();
     }, []); // means use it on initial app mount
 
-    const populateList = (users: Array<ZellerCustomer>) => {
+    const populateUserList = (users: Array<ZellerCustomer>) => {
+        if (!users || !users.length) {
+            return (
+                <div>
+                    loading users...
+                </div>
+            )
+        }
         return users.map((user: ZellerCustomer, index: number) => {
             return (
                 <UserListItem key={index} name={user.name} role={user.role} />
@@ -42,7 +39,7 @@ export const UserList = () => {
 
     return (
         <StyledUserList>
-                { populateList(users) }
+                { populateUserList(users) }
         </StyledUserList>
     )
 }
