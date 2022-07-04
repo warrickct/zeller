@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-// import styled from "styled-components";
+import { fetchZellerCustomers, ZellerCustomer } from "./ApolloClient/apolloClient";
 import StyledFlexWrapper from "./Layout/FlexWrapper";
-import { UserRole } from "./UserList";
 import UserRoleListItem from "./UserRoleListItem";
-import { useQuery, gql } from "@apollo/client";
-import { ListZellerCustomers } from "../graphql/queries";
 
 export const RoleList = () => {
-  // TODO: move enum to some constants file at higher level
-  // TODO: potentially make this an object instead since then I can iterate over it when populating this list?
-  const mockData: Array<UserRole> = [UserRole.ADMIN, UserRole.MANAGER];
-
+  const [ customerData, setCustomerData ] = useState([])
   const [selectedRole, setSelectedRole] = useState("");
 
   const handleItemClick = (value: string) => { 
@@ -18,8 +12,20 @@ export const RoleList = () => {
     setSelectedRole(value);
   };
 
-  const populateRoles = (roles: Array<UserRole>) => {
-    return roles.map((role: UserRole, index: number) => {
+  const populateRoles = (customerData: Array<ZellerCustomer>) => {
+    
+    // rough loading state placeholder
+    if (!customerData || !customerData.length) {
+      return (
+        <div>
+          loading roles...
+        </div>
+      )
+    }
+
+    const roles = customerData.map(c => c.role);
+    const uniqueRoles = roles.filter((role: string, index: number) => roles.indexOf(role) === index);
+    return uniqueRoles.map((role, index: number) => {
       const isActive = selectedRole === role;
       return (
         <UserRoleListItem
@@ -33,36 +39,21 @@ export const RoleList = () => {
     });
   };
 
-  useEffect(() => {
-    // populateRoles(mockData)
+  useEffect( () => {
+    const initRoleData = async () => {
+      const customer: any = await fetchZellerCustomers();
+      setCustomerData(customer.listZellerCustomers.items);
+    }
+    initRoleData();
   }, []);
-
-
-  const listZellerCustomersGQL = gql`${ListZellerCustomers}`;
-  const { data, loading, error } = useQuery(listZellerCustomersGQL);
 
   return (
     <StyledFlexWrapper width="100%" flexDirection="column">
-      {populateRoles(mockData)}
-
-      <div>
-        <p>
-          debugging below:
-        </p>
-        <p>
-          {JSON.stringify(data)}
-          {JSON.stringify(loading)}
-          {JSON.stringify(error)}
-        </p>
-      </div>
+      {populateRoles(customerData)}
     </StyledFlexWrapper>
   );
 };
 
-// const StyledRoleList = styled.div`
-//   // TODO: might be replacable by using the flex thing
-//   display: flex;
-//   flex-direction: column;
-// `;
+
 
 export default RoleList;

@@ -1,15 +1,23 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
-// import { RestLink } from "apollo-link-rest";
 import awsconfig from "../../aws-exports";
+import { ListZellerCustomers } from "../../graphql/queries";
 
-const httpLink = new HttpLink({
-//   uri: "https://48p1r2roz4.sse.codesandbox.io",
-  uri: awsconfig.aws_appsync_graphqlEndpoint,
-});
+export const fetchZellerCustomers = async () => {
+  const response = await fetch(awsconfig.aws_appsync_graphqlEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": `${awsconfig.aws_appsync_apiKey}`
+    },
+    body: JSON.stringify({ query: ListZellerCustomers }),
+  });
+  const json = await response.json();
+  const { data } = json;
+  return data;
+};
 
-
-export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: ApolloLink.from([httpLink]),
-  credentials: awsconfig.aws_appsync_apiKey,
-});
+export type ZellerCustomer = {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+}
