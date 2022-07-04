@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import StyledFlexWrapper from "./Layout/FlexWrapper";
 import { UserRole } from "./UserList";
 import UserRoleListItem from "./UserRoleListItem";
+import { useQuery, gql } from "@apollo/client";
+import { ListZellerCustomers } from "../graphql/queries";
 
 export const RoleList = () => {
   // TODO: move enum to some constants file at higher level
@@ -35,17 +37,32 @@ export const RoleList = () => {
     // populateRoles(mockData)
   }, []);
 
+
+  const listZellerCustomersGQL = gql`${ListZellerCustomers}`;
+  const { data, loading, error } = useQuery(listZellerCustomersGQL);
+
   return (
     <StyledFlexWrapper width="100%" flexDirection="column">
       {populateRoles(mockData)}
+
+      <div>
+        <p>
+          debugging below:
+        </p>
+        <p>
+          {JSON.stringify(data)}
+          {JSON.stringify(loading)}
+          {JSON.stringify(error)}
+        </p>
+      </div>
     </StyledFlexWrapper>
   );
 };
 
-const StyledRoleList = styled.div`
-  // TODO: might be replacable by using the flex thing
-  display: flex;
-  flex-direction: column;
-`;
+// const StyledRoleList = styled.div`
+//   // TODO: might be replacable by using the flex thing
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 export default RoleList;
