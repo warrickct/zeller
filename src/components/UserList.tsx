@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { fetchZellerCustomers, ZellerCustomer } from './ApolloClient/apolloClient';
 import UserListItem from './UserListItem';
 
 export enum UserRole {
@@ -20,25 +21,28 @@ export const UserList = () => {
         }
     ]
 
+    const [ users, setUsers ] = useState([]);
+
     useEffect(() => {
-        populateList(mockUsers);
-    }, [mockUsers]); // means use it on initial app mount
+        const initUserData = async () => {
+            const customerData: any = await fetchZellerCustomers();
+            setUsers(customerData.listZellerCustomers.items);
+        }
 
-    const populateList = (users: Array<any>) => {
-        // TODO: type the users 
+        initUserData();
+    }, []); // means use it on initial app mount
 
-        // TODO: typing the user
-        return users.map((user: any, index: number) => {
+    const populateList = (users: Array<ZellerCustomer>) => {
+        return users.map((user: ZellerCustomer, index: number) => {
             return (
                 <UserListItem key={index} name={user.name} role={user.role} />
             )
         })
-
     }
 
     return (
         <StyledUserList>
-                { populateList(mockUsers) }
+                { populateList(users) }
         </StyledUserList>
     )
 }
