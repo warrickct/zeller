@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchZellerCustomers, ZellerCustomer } from "./ApolloClient/apolloClient";
+import { fetchZellerCustomers, ZellerCustomer } from "./Client/client";
 import StyledFlexWrapper from "./Layout/FlexWrapper";
 import UserRoleListItem from "./UserRoleListItem";
 

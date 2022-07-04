@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fetchZellerCustomers, ZellerCustomer } from './ApolloClient/apolloClient';
+import { fetchZellerCustomers, ZellerCustomer } from './Client/client';
 import UserListItem from './UserListItem';
 
 export enum UserRole {

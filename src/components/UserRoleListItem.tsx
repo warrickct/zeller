@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 type RoleListItemProps = {
@@ -10,6 +11,7 @@ type RoleListItemProps = {
 export const UserRoleListItem = (props: RoleListItemProps) => {
   const { text, onClickHandler, inputName, isActive } = props;
   const id = `radio-${props.text}`;
+  const [isChecked, setIsChecked ] = useState(false);
 
   return (
     <RoleItem onClick={() => {
@@ -20,10 +22,9 @@ export const UserRoleListItem = (props: RoleListItemProps) => {
         id={id}
         value={text}
         name={inputName}
-        checked={isActive}
-        onClick={(e: any) => {
-            console.log('running', e);
-            e.preventDefault();
+        checked={isActive || isChecked}
+        onChange={() => {
+           setIsChecked(isActive);
         }}
       />
       <RoleInputLabel>{text}</RoleInputLabel>
