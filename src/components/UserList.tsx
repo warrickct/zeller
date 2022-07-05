@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { fetchZellerCustomers, ZellerCustomer } from '../Client/client';
+import { fetchZellerCustomers, ZellerCustomer } from '../api/client';
+import { RootState } from '../store';
 import UserListItem from './UserListItem';
 
 export enum UserRole {
@@ -10,7 +12,7 @@ export enum UserRole {
 };
 
 export const UserList = () => {
-
+    const selectedRole = useSelector((state: RootState) => state.home.roleSelected);
     const [ users, setUsers ] = useState([]);
 
     useEffect(() => {
@@ -20,7 +22,7 @@ export const UserList = () => {
         }
 
         initUserData();
-    }, []); // means use it on initial app mount
+    }, [selectedRole]); // means use it on initial app mount
 
     const populateUserList = (users: Array<ZellerCustomer>) => {
         if (!users || !users.length) {
@@ -30,7 +32,10 @@ export const UserList = () => {
                 </div>
             )
         }
-        return users.map((user: ZellerCustomer, index: number) => {
+        const filteredUsers = selectedRole ? users.filter((user: ZellerCustomer) => {
+            return user.role && user.role.toLowerCase() === selectedRole?.toLowerCase()
+        }) : users; 
+        return filteredUsers.map((user: ZellerCustomer, index: number) => {
             return (
                 <UserListItem key={index} name={user.name} role={user.role} />
             )

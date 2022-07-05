@@ -1,11 +1,13 @@
+import { Provider } from 'react-redux';
 import HomeView from './components/HomeView';
+import { store } from './store';
 
 function App() {
   return (
-    
-    <div className="App">
+    <Provider store={store}>
       <HomeView />
-    </div>
+    </Provider>
+    
   );
 }
 

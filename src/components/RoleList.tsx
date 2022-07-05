@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchZellerCustomers, ZellerCustomer } from "../Client/client";
+import { fetchZellerCustomers, ZellerCustomer } from "../api/client";
 import StyledFlexWrapper from "./Layout/FlexWrapper";
 import RoleListItem from "./RoleListItem";
 
@@ -8,13 +8,12 @@ export const RoleList = () => {
   const [selectedRole, setSelectedRole] = useState("");
 
   const handleItemClick = (value: string) => { 
-    console.log({value});
+    // done like this so clicking anywhere on the list 
+    // item will select it. 
     setSelectedRole(value);
   };
 
   const populateRoles = (customerData: Array<ZellerCustomer>) => {
-    
-    // rough loading state placeholder
     if (!customerData || !customerData.length) {
       return (
         <div>

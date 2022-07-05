@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import styled from "styled-components";
+import { selectRole } from "../store/homeSlice";
 
 type RoleListItemProps = {
   text: string;
@@ -12,10 +14,12 @@ export const RoleListItem = (props: RoleListItemProps) => {
   const { text, onClickHandler, inputName, isActive } = props;
   const id = `radio-${props.text}`;
   const [isChecked, setIsChecked ] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <RoleItem onClick={() => {
         onClickHandler(text);
+        dispatch(selectRole(text));
     }}>
       <RoleInput
         type="radio"
