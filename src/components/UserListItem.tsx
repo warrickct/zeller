@@ -8,7 +8,6 @@ type Props = {
 }
 
 export const UserListItem = (props: Props) => {
-
     const firstInitial = props.name.charAt(0).toUpperCase();
 
     return (
@@ -24,7 +23,7 @@ export const UserListItem = (props: Props) => {
                 alignItems="flex-start"
                 justifyContent="center"
             >
-                <Name>{props.name}</Name>
+                <Name data-testid="user-list-item__name">{props.name}</Name>
                 <Role>{props.role}</Role>
             </StyledFlexWrapper>
         </StyledUserListItem>        

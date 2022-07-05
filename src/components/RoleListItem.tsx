@@ -31,7 +31,7 @@ export const RoleListItem = (props: RoleListItemProps) => {
            setIsChecked(isActive);
         }}
       />
-      <RoleInputLabel>{text}</RoleInputLabel>
+      <RoleInputLabel data-test-id="role-list-item__label">{text}</RoleInputLabel>
     </RoleItem>
   );
 };

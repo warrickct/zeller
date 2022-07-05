@@ -5,7 +5,7 @@ import { store } from './store';
 function App() {
   return (
     <Provider store={store}>
-      <HomeView />
+      <HomeView data-testid="home-view" />
     </Provider>
     
   );
