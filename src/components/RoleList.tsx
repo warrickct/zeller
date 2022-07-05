@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchZellerCustomers, ZellerCustomer } from "./Client/client";
+import { fetchZellerCustomers, ZellerCustomer } from "../Client/client";
 import StyledFlexWrapper from "./Layout/FlexWrapper";
-import UserRoleListItem from "./UserRoleListItem";
+import RoleListItem from "./RoleListItem";
 
 export const RoleList = () => {
   const [ customerData, setCustomerData ] = useState([])
@@ -28,7 +28,7 @@ export const RoleList = () => {
     return uniqueRoles.map((role, index: number) => {
       const isActive = selectedRole === role;
       return (
-        <UserRoleListItem
+        <RoleListItem
           onClickHandler={handleItemClick}
           key={index}
           text={role}

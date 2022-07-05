@@ -1,5 +1,5 @@
-import awsconfig from "../../aws-exports";
-import { ListZellerCustomers } from "../../graphql/queries";
+import awsconfig from "../aws-exports";
+import { ListZellerCustomers } from "../graphql/queries";
 
 export const fetchZellerCustomers = async () => {
   const response = await fetch(awsconfig.aws_appsync_graphqlEndpoint, {

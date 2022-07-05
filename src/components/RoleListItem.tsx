@@ -8,7 +8,7 @@ type RoleListItemProps = {
   onClickHandler: (newRole: string) => void;
 };
 
-export const UserRoleListItem = (props: RoleListItemProps) => {
+export const RoleListItem = (props: RoleListItemProps) => {
   const { text, onClickHandler, inputName, isActive } = props;
   const id = `radio-${props.text}`;
   const [isChecked, setIsChecked ] = useState(false);
@@ -43,8 +43,8 @@ const RoleItem = styled.div`
     transition: background-color 0.3s ease; 
     
     :hover {
-        background-color: #bfbfd6;
-    }
+      background-color: #bfbfd6;
+     }
 `
 
 
@@ -57,4 +57,4 @@ const RoleInputLabel = styled.label`
     font-weight: 500;
 `;
 
-export default UserRoleListItem;
+export default RoleListItem;
